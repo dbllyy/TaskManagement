@@ -1,2 +1,85 @@
-ahjahdj
-ajshg
+-- Tabel untuk pengguna
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk tugas
+CREATE TABLE Tasks (
+    TaskID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(100) NOT NULL,
+    Description TEXT,
+    AssignedTo INT,
+    Status ENUM('Pending', 'In Progress', 'Completed') DEFAULT 'Pending',
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    DueDate DATETIME,
+    FOREIGN KEY (AssignedTo) REFERENCES Users(UserID)
+);
+
+-- Tabel untuk instalasi
+CREATE TABLE Installations (
+    InstallationID INT PRIMARY KEY AUTO_INCREMENT,
+    SoftwareName VARCHAR(100) NOT NULL,
+    Version VARCHAR(20),
+    InstalledDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+-- Tabel untuk proses
+CREATE TABLE Processes (
+    ProcessID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    StartTime DATETIME,
+    EndTime DATETIME,
+    Status ENUM('Running', 'Paused', 'Completed') DEFAULT 'Running',
+    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+);
+
+-- Tabel untuk pengiriman
+CREATE TABLE Deliveries (
+    DeliveryID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    DeliveryDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Pending', 'Delivered', 'Failed') DEFAULT 'Pending',
+    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+);
+
+-- Tabel untuk penerimaan
+CREATE TABLE Receipts (
+    ReceiptID INT PRIMARY KEY AUTO_INCREMENT,
+    DeliveryID INT,
+    ReceivedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Pending', 'Received', 'Rejected') DEFAULT 'Pending',
+    FOREIGN KEY (DeliveryID) REFERENCES Deliveries(DeliveryID)
+);
+
+-- Tabel untuk spesifikasi
+CREATE TABLE Specifications (
+    SpecID INT PRIMARY KEY AUTO_INCREMENT,
+    SpecType ENUM('Hardware', 'Software'),
+    SpecDescription TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk catatan kerusakan
+CREATE TABLE Issues (
+    IssueID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    Description TEXT,
+    Status ENUM('Open', 'In Progress', 'Resolved') DEFAULT 'Open',
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+);
+
+-- Tabel untuk catatan
+CREATE TABLE Notes (
+    NoteID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    NoteText TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
