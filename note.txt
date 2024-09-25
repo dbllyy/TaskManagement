@@ -172,3 +172,18 @@ CREATE TABLE Catatan (
     DibuatPada DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (UserID) REFERENCES Pengguna(UserID)
 );
+
+
+///////////////////////////////////////////
+
+1. tamplate surat (perbaikan, instalasi, sutker)
+2. komputer datang (input data)
+3. login user (admin, teknisi, guest, helpdesk)
+4. menu service = instalasi, perbaikan, kerusakan, Software, Hardware, jaringan, upgrade, kategori
+5. didalam menu (view, timestamp, status, teknisian, tanggal ambil)
+6.  -Teknisian = memilih komputer yang dikerjakan sesuai(no cabang)
+    - update status(timestamp) service, on progress, done
+    - perlu perbaikan (y) - butuh service pro kembalikan (x)
+    - ceklist
+    - selesai(timestamp, berita acara = hari tanggal, nama teknisi, pihak ke 2)
+    - tanggal ambil
