@@ -175,6 +175,7 @@ CREATE TABLE Catatan (
 
 
 ///////////////////////////////////////////
+NOTE DARI KA JODA
 
 1. tamplate surat (perbaikan, instalasi, sutker)
 2. komputer datang (input data)
@@ -187,3 +188,11 @@ CREATE TABLE Catatan (
     - ceklist
     - selesai(timestamp, berita acara = hari tanggal, nama teknisi, pihak ke 2)
     - tanggal ambil
+
+/////////////////////////////////////////
+ALUR MIKIR!!
+
+1. tabel 
+2. ERD
+3. migrations
+4. model & controller
