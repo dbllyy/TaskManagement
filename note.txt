@@ -196,3 +196,5 @@ ALUR MIKIR!!
 2. ERD
 3. migrations
 4. model & controller
+5. buat flow
+6. buat storyboard
