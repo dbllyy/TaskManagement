@@ -173,14 +173,72 @@ CREATE TABLE Catatan (
     FOREIGN KEY (UserID) REFERENCES Pengguna(UserID)
 );
 
+////////////////////////////////////////////
+
+
+    User 
+        user_id (PK)
+        username
+        password
+        role (admin, teknisi)
+
+maintanace
+
+    Komputer masuk
+        komputer_id (PK)
+        nama_komputer
+        no_cabang
+        spesifikasi
+
+    Service
+        service_id (PK)
+        jenis_service (instalasi, perbaikan, dll.)
+        status (on progress, done)
+        tanggal_service
+        user_id (FK)
+        komputer_id (FK)
+
+    Teknisi
+        teknisi_id (PK)
+        nama_teknisi
+        no_cabang
+
+
+
+    Checklist
+        checklist_id (PK)
+        service_id (FK)
+        item (perbaikan yang dilakukan)
+        status (selesai, butuh service)
+
+    Berita Acara
+        berita_acara_id (PK)
+        service_id (FK)
+        tanggal
+        nama_teknisi
+        pihak_kedua
+
+Relasi
+
+    User ke Service: Satu user (admin/teknisi) dapat menangani banyak service (1
+    ).
+    Komputer ke Service: Satu komputer dapat memiliki banyak service (1
+    ).
+    Teknisi ke Service: Satu teknisi dapat menangani banyak service (1
+    ).
+    Service ke Checklist: Satu service dapat memiliki banyak checklist (1
+    ).
+    Service ke Berita Acara: Satu service memiliki satu berita acara (1:1).
+
 
 ///////////////////////////////////////////
 NOTE DARI KA JODA
 
-1. tamplate surat (perbaikan, instalasi, sutker)
-2. komputer datang (input data)
+1. tamplate surat (perbaikan, instalasi, surat kerja)
+2. komputer datang (baru/service) (input data) (note kerusakan dari pengirim) (konfigurasi ip)
 3. login user (admin, teknisi, guest, helpdesk)
 4. menu service = instalasi, perbaikan, kerusakan, Software, Hardware, jaringan, upgrade, kategori
+- saat proses instaal ada menu ceklsit (os, install driver, msoffice, firewall, kofigurasi ip)
 5. didalam menu (view, timestamp, status, teknisian, tanggal ambil)
 6.  -Teknisian = memilih komputer yang dikerjakan sesuai(no cabang)
     - update status(timestamp) service, on progress, done
@@ -192,9 +250,17 @@ NOTE DARI KA JODA
 /////////////////////////////////////////
 ALUR MIKIR!!
 
-1. tabel 
-2. ERD
+1. ERD
 3. migrations
 4. model & controller
 5. buat flow
 6. buat storyboard
+
+////////////////////////////
+SIDEBAR
+1. Dashboard
+2. Komputer 
+3. Service
+4. Berita Acara
+5. Usertabel 
+2. 
